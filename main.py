@@ -279,10 +279,10 @@ user2 = user.copy()
 
 ######## TUPLES
 
-my_tuple = (1,2,3,4,5)
+my_tuple = (1,2,3,4,5,5,5,5)
 
-print(my_tuple[1])
-print(5 in my_tuple)
+#print(my_tuple[1])
+#print(5 in my_tuple)
 
 user = {
   (1,2):[1,2,3],
@@ -304,4 +304,195 @@ x,y,z,*other = (1,2,3,4,5)
 
 #######  Tuples Methods
 
-print(my_tuple.count(5))
+#print(my_tuple.count(5))
+#print(my_tuple.index(4))
+#print(len((my_tuple)))
+
+
+######### SETS  unoredred collection of unique objects
+
+
+my_set={1,2,3,4,5,5}   
+#print(my_set)    # no duplicates
+my_set.add(100)
+my_set.add(2)
+#print(my_set)
+
+my_list=[1,2,3,4,5,5,5]
+# how to return a list without repetition
+#print(set(my_list))
+
+#print(1 in my_set)
+#print(len(my_set))
+#print(list(my_set))
+
+new_set = my_set.copy()
+my_set.clear()
+#print(new_set)
+#print(my_set)
+
+########### SETS METHODS   
+
+my_set={1,2,3,4,5}
+your_set = {4,5,6,7,8,9,10}
+
+#print(my_set.difference(your_set))
+
+my_set.discard(5)
+#print(my_set)
+
+#print(my_set.difference_update(your_set))
+#print(my_set)
+
+#print(my_set.intersection(your_set))
+#print(my_set.isdisjoint(your_set))
+#print(my_set.union(your_set))
+#print(my_set.issubset(your_set))
+#print(my_set.issuperset(your_set))
+#print(my_set | your_set)  # union
+#print(my_set & your_set)  # intersection
+
+###########################################################################
+###########################################################################
+############### Python Basics 2
+
+
+###### Conditional logic
+
+#is_old = False
+#is_licenced = True
+
+#if is_old:
+#  print('you are old enough to drive!')
+#elif is_licenced:
+#  print('you can drive!')
+#else:
+#  print(' too young to drive!')
+
+
+####### Ternary operator
+#is_friend = True
+#can_message = "message allowed" if is_friend else "not allowed to message"
+#print(can_message)
+
+
+######## short circuiting
+
+#is_user = True
+
+#if is_friend and is_user :
+  #print('best friends forever')
+
+#if is_friend or is_user :
+  #print('friends ')
+
+#######  logical operator
+
+# and
+# or
+# < <=
+# > >=
+# == is equal ####  === is identic    #### != not equal  #### <> 
+"""
++=	    x += 5	        x = x + 5
+-=	    x -= 5	        x = x - 5
+*=	    x *= 5	        x = x * 5
+/=	    x /= 5	        x = x / 5
+%=	    x %= 5	        x = x % 5
+//=	    x //= 5	        x = x // 5
+**=	    x **= 5	        x = x ** 5
+&=	    x &= 5	        x = x & 5
+|=	    x |= 5	        x = x | 5
+^=	    x ^= 5	        x = x ^ 5
+>>=	    x >>= 5	        x = x >> 5
+<<=	    x <<= 5	        x = x << 5
+
+####### #######    Exercise
+
+is_magician = True
+is_expert = True
+
+if is_magician and is_expert:
+  print("you are a master magician")
+elif is_magician and not is_expert:
+  print("at least you're getting there")
+elif not is_magician:
+  print("you need magic powers") 
+
+
+#########  FOR LOOPS
+
+
+def isPalindrome(s):
+  return s==s[::-1]
+
+word = "malayalam"
+ans = isPalindrome(word)
+if ans :
+  print("Yes")
+else:
+  print("No") 
+
+
+#########  FOR LOOPS
+
+### for some_item in some_iterable:
+    #### do something
+#strings
+for letter in 'zero to mastery':
+  print(letter)
+#lists
+for item in [1,2,3,4,5]:
+  print(item)
+#tuple
+for item in (1,2,3,4,5):
+  print(item)
+#set
+for item in {1,2,3,4,5}:
+  print(item)
+
+
+
+#nested loops
+for item in (1,2,3,4,5):
+  for x in ['a','b','c']:
+    print(item,x)
+    
+
+ 
+# dictionary
+
+user = {
+  'name': 'Mohamed',
+  'age':35,
+  'can_swim':True
+}
+
+for item in user:
+  print(item)
+
+for item in user.items():
+  print(item)
+
+for item in user.values():
+  print(item)
+
+for item in user.keys():
+  print(item)
+
+for key, value in user.items():
+  print(key, value)
+
+
+
+# counter exercise
+
+my_list = [1,2,3,4,5,6,7,8,9]
+counter = 0
+for item in my_list:
+  counter+= item
+
+print(counter)
+
+  """
+#range
