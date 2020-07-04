@@ -494,5 +494,234 @@ for item in my_list:
 
 print(counter)
 
-  """
+  
 #range
+
+print(range(100))
+for _ in range(0,100,2):
+  print(_, range(100))
+
+
+for _ in range(10):
+  print(list(range(10)))
+
+
+
+# enumerate 
+
+for char in enumerate('Hellllllooo'):
+  print(char)
+
+for i,char in enumerate('Hellllllooo'):
+  print(i,char)
+
+for i,char in enumerate((1,2,3,4)):
+  print(i,char)
+
+
+
+for i,char in enumerate(list(range(100))):
+  print(i,char)
+  if char ==50:
+    print("index of 50 is :", i)
+
+
+# while loops
+
+i = 0
+while i < 50:
+  print(i)
+  i+=1
+
+
+while True:
+  input('say something: ')
+  break
+
+while True:
+  response = input('say something: ')
+  if (response == 'bye'):
+    break
+   # continue go back to the Loop
+   # pass placeholder, prevent a bug in empty loops
+
+
+picture = [
+  [0,0,0,1,0,0,0],
+  [0,0,1,1,1,0,0],
+  [0,1,1,1,1,1,0],
+  [1,1,1,1,1,1,1],
+  [0,0,0,1,0,0,0],
+  [0,0,0,1,0,0,0]
+]
+
+# iterate over picture
+  ## if 0 print ' '
+  ## if 1 print '*'
+
+for row in picture:
+  for pixel in row:
+    if pixel == 0 :
+      print(' ', end='')
+    else:
+      print("*", end='')
+  print('')
+
+
+
+## exercise check for duplicate in list
+
+a_list = ['a', 'b', 'c', 'b', 'd', 'm', 'n', 'n']
+
+duplicates =[]
+for value in a_list:
+  if a_list.count(value) > 1:
+    if value not in duplicates:
+      duplicates.append(value)
+
+print(duplicates)
+
+
+
+
+#### Functions
+
+def say_hi():
+  print('Hi')
+
+say_hi()
+#print(say_hi)
+
+#parameters
+#positional parameters
+
+def say_hello(name, emoji):
+  print('Hello', name , emoji )
+
+#arguments actual values we provide to functions
+#positional arguments
+say_hello('Abdou', '😀')
+say_hello('Moh', '😀')
+say_hello('Emily', '😀')
+
+# keyword arguments 
+
+say_hello(emoji='☹️', name='Baba')
+
+# default parameters
+
+def greet(name='Darth Vader', emoji='😈'):
+  print('Hello', name, emoji)
+
+greet('Luke', '😀')
+greet()
+
+# return
+
+def sum(num1, num2):
+  return num1+num2
+
+total = sum(4,5)
+print(total)
+
+
+# methods Vs functions
+
+#'hello'.
+
+# docstrings  describing the function job
+
+def test(a):
+  '''
+  Info : this function tests and prints param a 
+  '''
+  print(a)
+
+test('9999')
+
+##magic methods
+
+print(test.__doc__)
+
+
+
+# clean code 
+def is_even(num):
+  return num % 2 == 0
+    
+print(is_even(50))
+print(is_even(51))
+
+
+
+###  *args **kwargs
+
+def super_func(*args, **kwargs):
+  print(*args)
+  print(kwargs)
+  total = 0
+  for items in kwargs.values():
+    total += items
+  return sum(args) + total
+
+print(super_func(1,2,3,4, num1 = 5, num2 = 10)) 
+
+
+
+# exercise function
+
+def highest_even(li):
+  highest = 0   # evens =[]
+  for item in li:
+    if item % 2 == 0:
+      if item >highest:  # evens.append(item)
+        highest = item
+  
+  return highest # return max(evens)
+
+
+
+print(highest_even([15,10,3,4,6,8,12]))
+
+
+
+## Scopes
+
+total = 0
+def count():
+  global total  # use the global total instead of creating a new one inside the function's scope
+  total +=1
+  return total
+
+count()
+count()
+print(count())
+
+## dependency injection
+
+total = 0
+def count(total):
+  total +=1
+  return total
+
+print(count(count(count(total))))
+
+
+### nonlocal keyword
+
+def outer():
+  x = "local"
+  def inner():
+    nonlocal x
+    x = "non local"
+    print("inner:", x)
+  
+  inner()
+  print("outer:", x)
+
+outer()
+
+"""
+
+###### OOP
+
