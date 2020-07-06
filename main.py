@@ -721,7 +721,250 @@ def outer():
 
 outer()
 
-"""
+
 
 ###### OOP
+
+class BigObject:
+  pass
+
+obj1 = BigObject()
+
+print(type(BigObject))
+print(type(obj1))
+
+
+class PlayerCharacter:
+  
+  membership = True  # Class Object Attribute
+  def __init__(self, name, age):    
+    if self.membership :
+      self.name = name  # dynamic object attributes
+      self.age = age
+  def shout(self):
+    print(f'my name is {self.name}')
+  def run(self):
+    print('Run')
+    return 'done'
+  
+  ### decorators
+
+  @classmethod      ### mwthod on class doesnt need to instantiate objects to use class method
+  def adding_things(cls, num1, num2):      # cls class equivalent to self
+    #return num1 + num2
+    return cls('Teddy', num1+num2)
+
+  @staticmethod   # no access to cls, to use  when we don't care about attributes
+  def adding_things2(num1, num2):
+    return num1 + num2
+  
+
+  
+  
+player1 = PlayerCharacter('Aaa', 33)
+player2 = PlayerCharacter('Bbb', 44)
+
+#print(player1.name)
+#print(player1.age)
+#print(player1.run())
+#print(player1.shout())
+#print(player2.shout())
+
+
+# help(list)
+
+#print(player1.adding_things(2,3))
+player3 = PlayerCharacter.adding_things(2,3)
+#print(player3)
+print(player3.age)
+
+
+class NameOfClass():
+  class_attribute = 'value'
+  def __init__(self, param1, param2):
+    self.param1 = param1
+    self.param2 = param2
+
+  def method(self):
+    #code
+  
+  @classmethod
+  def clas_method(cls, param1, param2):
+    # code  
+  
+  @staticmethod
+  def static_method(param1, param2):
+    # code 
+    
+
+#### 4 pillars of OOP
+### Encapsulation   : bonding of data and functions ( attributes and methods)
+### Abstraction
+
+class PlayerCharacter:
+  
+  def __init__(self, name, age):    
+    self._name = name  # _ indicates it should not be modified
+    self._age = age    #   treated as private
+
+  def run(self):
+    print('run')
+  
+  def speak(self):
+    print(f'my name is {self._name}, and I am {self._age} years old')
+
+player1 = PlayerCharacter('Abdou', 100)
+player1.speak()  # we don't need to know how speak() works to use it
+
+# player1.name = '!!!!!'  # still can modifiy attributes
+# player1.speak = 'Boooooo'   # and even methods , no real privacy in Python
+
+# print(player1.speak)
+
+####### INHERITENCE
+#  allows new objects to take properties of existing objects
+
+class User:
+  def sign_in(self):
+    print('logged in')
+
+class Wizard(User):  # pass the parent class that we want to inherit
+  def __init__(self, name, power):
+    self.name = name
+    self.power = power
+
+  def attack(self):
+    print(f'attacking with power of {self.power}')
+
+class Archer(User):
+  def __init__(self, name, nb_arrows):
+    self.name = name
+    self.nb_arrows = nb_arrows
+  
+  def attack(self):
+    print(f'attacking with arrows: arrows left-{self.nb_arrows}')
+  
+
+wizard1 = Wizard('Merlin', 50)
+archer1 = Archer('Robin', 100)
+#rint(wizard1.sign_in())
+#print(archer1.sign_in())
+wizard1.attack()
+archer1.attack()
+
+# isinstance(instance, class) 
+print(isinstance(wizard1, Wizard))
+print(isinstance(wizard1, User))
+print(isinstance(wizard1, object))
+
+
+########## POLYMORPHISM
+#####  method belong to objects
+#####  object classes can share the same method Name
+#####  method names can act differently based on what object calls them
+
+class User:
+  def sign_in(self):
+    print('logged in')
+
+  def attack(self):
+    print('Do Nothing')
+
+class Wizard(User):  # pass the parent class that we want to inherit
+  def __init__(self, name, power):
+    self.name = name
+    self.power = power
+
+  def attack(self):   ## attack is defined for both subclasses
+    User.attack(self)   # use the attack method from parent
+    print(f'attacking with power of {self.power}')
+
+class Archer(User):
+  def __init__(self, name, nb_arrows):
+    self.name = name
+    self.nb_arrows = nb_arrows
+  
+  def attack(self):  ### but this one acts differently from wizard attack
+    print(f'attacking with arrows: arrows left-{self.nb_arrows}')
+  
+
+wizard1 = Wizard('Merlin', 50)
+archer1 = Archer('Robin', 100)
+
+print(wizard1.attack())
+
+#wizard1.attack()  
+#archer1.attack()    ## output is different because object caller is 
+
+def player_attack(char):
+  char.attack()
+
+#player_attack(wizard1)  # again same function different output
+#player_attack(archer1)
+
+#for char in [wizard1, archer1]:
+ # char.attack()
+
+
+##### super()
+
+class User(object):
+  def __init__(self, email):
+    self.email = email
+  
+  def sign_in(self):
+    print('logged in')
+
+
+class Wizard(User):  
+    def __init__(self, name, power, email):
+      #User.__init__(self, email)
+      super().__init__(email)  # refer to parent class
+      self.name = name
+      self.power = power
+
+    def attack(self):  
+      print(f'attacking with power of {self.power}')
+
+
+  
+
+wizard1 = Wizard('Merlin', 50, 'merlin@gmail.com')
+
+print(wizard1.email)
+
+
+###### Object Introspection
+### ability to determine type of object during Runtime
+
+class User(object):
+  def __init__(self, email):
+    self.email = email
+  
+  def sign_in(self):
+    print('logged in')
+
+
+class Wizard(User):  
+    def __init__(self, name, power, email):
+      #User.__init__(self, email)
+      super().__init__(email)  # refer to parent class
+      self.name = name
+      self.power = power
+
+    def attack(self):  
+      print(f'attacking with power of {self.power}')
+
+
+  
+
+wizard1 = Wizard('Merlin', 50, 'merlin@gmail.com')
+#print(dir(wizard1.email))
+print(dir(wizard1))  # dir function  gives all methods and attributes of instance wizard1
+
+"""
+
+###### Dunder Methods
+
+
 
