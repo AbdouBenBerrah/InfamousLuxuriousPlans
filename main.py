@@ -962,9 +962,150 @@ wizard1 = Wizard('Merlin', 50, 'merlin@gmail.com')
 #print(dir(wizard1.email))
 print(dir(wizard1))  # dir function  gives all methods and attributes of instance wizard1
 
-"""
 
 ###### Dunder Methods
+
+class Toy():
+  def __init__(self, color, age):
+    self.color = color
+    self.age = age 
+
+action_figure = Toy('red', 0)
+print(action_figure.__str__())
+print(str(action_figure))   
+
+
+
+
+# Exercise Extending list
+
+class SuperList(list):
+  def __len__(self):
+    return 1000
+
+
+super_list1 = SuperList()
+print(len(super_list1))
+super_list1.append(5)
+print(super_list1[0])
+
+print(issubclass(SuperList, list))
+
+
+
+#### multiple INHERITENCE
+
+class User(object):
+  def __init__(self, email):
+    self.email = email
+    print('init complete')
+  
+  def sign_in(self):
+    print('logged in')
+
+
+class Wizard(User):  
+    def __init__(self, name, power):
+      self.name = name
+      self.power = power
+
+    def attack(self):  
+      print(f'attacking with power of {self.power}')
+    
+
+class Archer(User):
+  def __init__(self, name, nb_arrows):
+    self.name = name
+    self.nb_arrows = nb_arrows
+  
+  def check_arrows(self): 
+    print(f'{self.nb_arrows} left-')
+  
+  def run(self):
+    print('run')
+
+class HybridBorg(Wizard, Archer):
+  def __init__(self, name, power, nb_arrows):
+    Archer.__init__(self, name, nb_arrows)
+    Wizard.__init__(self, name, power)
+
+
+
+wizard1 = Wizard('Merlin', 50)
+archer1 = Archer('Robin', 100)
+
+hb1 = HybridBorg('borgie', 50, 100)
+
+#print(hb1.run())
+print(hb1.check_arrows())
+print(hb1.attack())
+print(hb1.sign_in())
+
+
+##### MRO Method Resolution open
+
+class A:
+  #num = 10
+  pass
+
+class B(A):
+  pass
+
+class C(A):
+  #num = 1
+  pass
+
+class D(B, C):
+  pass
+
+#print(D.num)
+print(D.mro())
+# D.num
+D.__str__
+
+
+
+class X: pass
+class Y: pass
+class Z: pass
+class A(X,Y): pass
+class B(Y,Z): pass 
+class M(B, A, Z): pass
+
+print(M.mro())
+
+"""
+
+
+##########################################
+######### Functional Programming
+
+## map() , filter(), zip(), reduce()
+
+my_list = [1,2,3]
+def multiply_by_2(item):
+  #new_list = []
+  #for item in li:
+   # new_list.append(item*2)
+  #return new_list
+  return item*2   # replace code above with use of map
+
+#print(list(map(multiply_by_2, my_list)))
+#print(my_list)
+
+def only_odd(item):
+  return item % 2 != 0
+
+#print(list(map(only_odd, my_list)))
+#print(list(filter(only_odd, my_list)))
+#print(my_list)
+
+your_list=[10,20,30]
+your_tuple=(40,50,60)
+print(list(zip( my_list, your_list)))
+print(list(zip( my_list, your_list, your_tuple)))
+
+print(my_list)
 
 
 
