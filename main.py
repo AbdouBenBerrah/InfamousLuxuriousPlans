@@ -1074,13 +1074,15 @@ class M(B, A, Z): pass
 
 print(M.mro())
 
-"""
+
 
 
 ##########################################
 ######### Functional Programming
 
 ## map() , filter(), zip(), reduce()
+
+from functools import reduce
 
 my_list = [1,2,3]
 def multiply_by_2(item):
@@ -1102,10 +1104,142 @@ def only_odd(item):
 
 your_list=[10,20,30]
 your_tuple=(40,50,60)
-print(list(zip( my_list, your_list)))
-print(list(zip( my_list, your_list, your_tuple)))
+#print(list(zip( my_list, your_list)))
+#print(list(zip( my_list, your_list, your_tuple)))
+
+#print(my_list)
+
+def accumulator(acc, item):
+  print(acc, item)
+  return acc + item
+
+#print(list(reduce(accumulator, my_list, 0)))
+#print(reduce(accumulator, my_list, 0))
+#print(my_list)
+
+##################### Lambda expressions
+
+### anonymous function you only need oct
+
+## lambda param: action(param)
+
+
+
+print(list(map(lambda item: item*2, my_list)))
+print(list(filter(lambda item: item%2 !=0, my_list)))
+print(reduce(lambda acc,item: item+acc, my_list))
 
 print(my_list)
 
 
+####### exercise lambda expressions
+
+my_list = [5,4,3]
+
+print(list(map(lambda item: item**2, my_list)))
+
+a = [(0,2), (10,-1), (9,9),(4,3) ] 
+
+# list sorting
+a.sort(key=lambda x: x[1])  # i want to sort by the key which is 2nd item
+print(a)
+#print(list(filter(lambda item: )))
+
+
+
+##################  List, Set, dictionary comprehensions
+my_list = []
+
+for char in 'hello':
+  my_list.append(char)
+
+#print(my_list)
+
+#### same code with comprehensions
+my_list2 = [char for char in 'hello']
+#print(my_list2)
+
+my_list3 = [num for num in range(0,100)]
+#print(my_list3)
+
+my_list4 = [num*2 for num in range(0,100)]
+#print(my_list4)
+
+my_list5 = [num**2 for num in range(0,100) if num%2==0]
+#print(my_list5)
+
+
+my_set = {char for char in 'hello'}
+#print(my_set)
+
+my_set2 = {num for num in range(0,100)}
+#print(my_set2)
+
+my_set3 = {num**2 for num in range(0,100) if num%2==0}
+#print(my_set3)
+
+my_dict= {
+  'a':1,
+  'b':2,
+  'c':3
+}
+my_dict2 = {key:value**2 for key, value in my_dict.items() if value%2==0}
+print(my_dict2)
+
+my_dict3 = {num:num*2 for num in[1,2,3]}
+print(my_dict3)
+
+
+###################   Exercise comprehensions
+sm_list = ['a', 'b', 'c', 'b', 'd', 'm', 'n', 'n']
+
+duplicates = list(set([char for char in sm_list if sm_list.count(char) > 1 ]))
+print(duplicates)
+"""
+
+######################## Decorators
+
+#def hello():
+ # print('hello')
+#
+#greet = hello
+#hello()
+#del hello    # delete the pointer hello but the function still works
+#print(greet())
+
+#def hello(func):
+ # func()
+
+#def greet():
+  #print('still here')
+
+#a = hello(greet)  # we call function hello with argument function greet
+#print(a)
+
+########## Higher order function HOC
+### any function that accept a function as a parameters
+### or return a function
+
+def greet(func):
+  func()
+
+def greet2():
+  def func():
+    return 5
+  return func
+
+#### a decorator enhance and supercharge a function
+
+def my_decorator(func):
+  def wrap_func():
+    print('*************')
+    func()
+    print('*************')
+  return wrap_func
+
+@my_decorator
+def hello():
+  print('hello')
+
+hello()
 
